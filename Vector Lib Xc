@@ -1,0 +1,108 @@
+function @vector($x:number, $y:number, $z:number, $w:number) : text
+	var $v = ".x{}.y{}.z{}.w{}"
+	$v.x = $x
+	$v.y = $y
+	$v.z = $z
+	$v.w = $w
+	print("Vector Create Value", $v)
+	return $v
+function @vadd($vec1:text, $vec2:text) : text
+	print("Vector 1 Value", $vec1)
+	print("Vector 2 Value", $vec2)
+	var$v = ".x{}.y{}.z{}.w{}"
+	$v.x = $vec1.x + $vec2.x
+	$v.y = $vec1.y + $vec2.y
+	$v.z = $vec1.z + $vec2.z
+	$v.w = $vec1.w + $vec2.w
+	print("Vector Add Value", $v)
+	return $v
+function @vsub($vec1:text, $vec2:text) : text
+	print("Vector 1 Value", $vec1)
+	print("Vector 2 Value", $vec2)
+	var$v = ".x{}.y{}.z{}.w{}"
+	$v.x = $vec1.x - $vec2.x
+	$v.y = $vec1.y - $vec2.y
+	$v.z = $vec1.z - $vec2.z
+	$v.w = $vec1.w - $vec2.w
+	print("Vector Subtract Value", $v)
+	return $v
+function @vsmulti($vec1:text, $scalar:number) : text
+	print("Vector 1 Value", $vec1)
+	print("Scalar Value", $scalar)
+	var$v = ".x{}.y{}.z{}.w{}"
+	$v.x = $vec1.x * $scalar
+	$v.y = $vec1.y * $scalar
+	$v.z = $vec1.z * $scalar
+	$v.w = $vec1.w * $scalar
+	print("Vector Scalar Multiply Value", $v)
+	return $v
+function @vsdiv($vec1:text, $scalar:number) : text
+	print("Vector 1 Value", $vec1)
+	print("Scalar Value", $scalar)
+	var$v = ".x{}.y{}.z{}.w{}"
+	$v.x = $vec1.x / $scalar
+	$v.y = $vec1.y / $scalar
+	$v.z = $vec1.z / $scalar
+	$v.w = $vec1.w / $scalar
+	print("Vector Scalar Division Value", $v)
+	return $v
+function @vmag($vec1:text) : number
+	print("Vector 1 Value", $vec1)
+	var $v = sqrt($vec1.x ^ 2 + $vec1.y ^ 2 +$vec1.z ^ 2 + $vec1.w ^ 2)
+	print("Vector Magnitude Value", $v)
+	return $v
+function @vnorm($vec1:text) : text 
+	var $mag = @vmag($vec1)
+	print("Vector 1 Value", $vec1)
+	var$v = ".x{}.y{}.z{}.w{}"
+	$v.x = $vec1.x / $mag
+	$v.y = $vec1.y / $mag
+	$v.z = $vec1.z / $mag
+	$v.w = $vec1.w / $mag
+	print("Vector Norm Value", $v)
+	return $v
+function @vzero($vec1:text) : text
+	var $mag = @vmag($vec1)
+	print("Vector 1 Value", $vec1)
+	var$v = ".x{}.y{}.z{}.w{}"
+	$v.x = $vec1.x * 0 
+	$v.y = $vec1.y * 0
+	$v.z = $vec1.z * 0
+	$v.w = $vec1.w * 0
+	print("Vector Zero Value", $v)
+	return $v
+function @vdot($vec1:text, $vec2:text) : number
+	print("Vector 1 Value", $vec1)
+	print("Vector 2 Value", $vec2)
+	var $v = ($vec1.x * $vec2.x) + ($vec1.y * $vec2.y) + ($vec1.z * $vec2.z) + ($vec1.w * $vec2.w)
+	print("Vector Dot Product Value", $v)
+	return $v
+function @vcross($vec1:text, $vec2:text) : text
+	print("Vector 1 Value", $vec1)
+	print("Vector 2 Value", $vec2)
+	var$v = ".x{}.y{}.z{}.w{}"
+	$v.x = ($vec1.y * $vec2.z - $vec1.z * $vec2.y)
+	$v.y = ($vec1.z * $vec2.x - $vec1.x * $vec2.z)
+	$v.z = ($vec1.x * $vec2.y - $vec1.y * $vec2.x)
+	$v.w = 0
+	print("Vector Cross Product Value", $v)
+	return $v
+function @vsproject($vec1:text, $vec2:text) : number
+	print("Vector 1 Value", $vec1)
+	print("Vector 2 Value", $vec2)
+	var$v = @vdot($vec1,$vec2)/@vmag($vec2)
+	print("Vector Scalar Projection Value", $v)
+	return $v
+function @vproject($vec1:text, $vec2:text) : text
+	print("Vector 1 Value", $vec1)
+	print("Vector 2 Value", $vec2)
+	var$dot = @vdot($vec1,$vec2)
+	var$mag2 = @vmag($vec2)^2
+	var$factor = $dot / $mag2
+	var$v = ".x{}.y{}.z{}.w{}"
+	$v.x = $vec2.x * $factor
+	$v.y = $vec2.y * $factor
+	$v.z = $vec2.z * $factor
+	$v.w = $vec2.w * $factor
+	print("Vector Projection Value", $v)
+	return $v
